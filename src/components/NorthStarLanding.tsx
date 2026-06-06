@@ -335,11 +335,11 @@ function CaseStudies() {
   );
 }
 
-function Milestone({ label, text, step, highlight }: { label: string; text: string; step: number; highlight?: boolean }) {
+function Milestone({ label, text, step, highlight, icon }: { label: string; text: string; step: number; highlight?: boolean; icon?: React.ReactNode }) {
   return (
     <div className="flex gap-3">
-      <div className={`w-6 h-6 rounded-full grid place-items-center text-[10px] font-bold shrink-0 ${highlight ? "text-primary-foreground" : "text-foreground bg-muted"}`} style={highlight ? { background: "var(--gradient-gold)" } : undefined}>
-        {step}
+      <div className={`w-7 h-7 rounded-full grid place-items-center text-[10px] font-bold shrink-0 ${highlight ? "text-primary-foreground" : "text-foreground bg-muted"}`} style={highlight ? { background: "var(--gradient-gold)" } : undefined}>
+        {icon ?? step}
       </div>
       <div>
         <div className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground">{label}</div>
