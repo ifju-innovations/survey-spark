@@ -73,9 +73,19 @@ function Hero() {
             In a world of <em className="italic text-gold-deep">distraction</em>,
             <br /> we give <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>direction</span>.
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
-            Polaris is your personal self-discovery coach. Answer a few questions about who you are today, and we'll craft a science-backed daily plan to help you focus, grow, and become the version of you you're meant to be.
-          </p>
+          <div className="mt-8 relative max-w-xl">
+            <div className="absolute -left-4 top-0 bottom-0 w-1 rounded-full" style={{ background: "var(--gradient-gold)" }} />
+            <p className="pl-6 text-lg text-foreground/80 leading-relaxed font-light">
+              <span className="font-display italic text-foreground text-xl">Polaris</span> is your personal self-discovery coach. Answer a few honest questions about who you are today — we'll craft a <span className="font-semibold text-foreground">science-backed daily plan</span> to help you focus, grow, and meet the version of you you're meant to be.
+            </p>
+            <div className="mt-5 pl-6 flex flex-wrap gap-2">
+              {["Psychology-led", "Built around you", "5-minute rituals"].map((t) => (
+                <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-full bg-card border border-border text-foreground/70">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#survey">
               <Button size="lg" className="rounded-full text-base h-12 px-6" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)", boxShadow: "var(--shadow-glow)" }}>
