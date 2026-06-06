@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote, Smartphone } from "lucide-react";
+import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote } from "lucide-react";
+import productImage from "@/assets/polaris-product.jpg";
 
 type Question = {
   id: string;
@@ -41,11 +42,11 @@ function Nav() {
           <div className="w-9 h-9 rounded-full grid place-items-center" style={{ background: "var(--gradient-gold)" }}>
             <Compass className="w-5 h-5 text-primary-foreground" strokeWidth={2.5} />
           </div>
-          <span className="font-display text-xl font-semibold tracking-tight">North Star</span>
+          <span className="font-display text-xl font-semibold tracking-tight">Polaris</span>
         </a>
         <a href="#survey">
           <Button variant="default" size="sm" className="rounded-full">
-            Take the survey <ArrowRight className="w-4 h-4 ml-1" />
+            Personalize my plan <ArrowRight className="w-4 h-4 ml-1" />
           </Button>
         </a>
       </div>
@@ -63,19 +64,19 @@ function Hero() {
       <div className="relative mx-auto max-w-6xl px-6 pt-20 pb-28 grid lg:grid-cols-2 gap-12 items-center">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/60 text-xs font-medium text-muted-foreground mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-gold-deep" /> Now validating with 1,000 students across India
+            <Sparkles className="w-3.5 h-3.5 text-gold-deep" /> 1,200+ students already discovering themselves with Polaris
           </div>
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight">
-            In a world of <em className="italic text-gold-deep">distraction</em>,
-            <br /> we give <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>direction</span>.
+            Find your <em className="italic text-gold-deep">true north</em>
+            <br /> with a plan built <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>around you</span>.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
-            North Star is a science-backed life-coach app for Indian youth. Replace doomscrolling with daily nudges, personalised plans, and a community that's actually building something.
+            Polaris is your personal self-discovery coach. Answer a few questions about who you are today, and we'll craft a science-backed daily plan to help you focus, grow, and become the version of you you're meant to be.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#survey">
               <Button size="lg" className="rounded-full text-base h-12 px-6" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)", boxShadow: "var(--shadow-glow)" }}>
-                Take the 60-second survey <ArrowRight className="w-4 h-4 ml-1" />
+                Get my personalized plan <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </a>
             <a href="#stories">
@@ -92,56 +93,24 @@ function Hero() {
             <div><span className="font-semibold text-foreground">68%</span> feel alienated</div>
           </div>
         </div>
-        <PhoneMock />
+        <ProductVisual />
       </div>
     </section>
   );
 }
 
-function PhoneMock() {
+function ProductVisual() {
   return (
-    <div className="relative mx-auto w-[300px] sm:w-[340px]">
-      <div className="absolute inset-0 -m-4 rounded-[3rem] blur-2xl opacity-60" style={{ background: "var(--gradient-gold)" }} />
-      <div className="relative rounded-[2.5rem] bg-foreground p-3 shadow-2xl">
-        <div className="rounded-[2rem] bg-background overflow-hidden aspect-[9/19] flex flex-col">
-          <div className="px-5 pt-3 pb-2 flex items-center justify-between text-[10px] text-muted-foreground">
-            <span>9:41</span>
-            <Smartphone className="w-3 h-3" />
-          </div>
-          <div className="px-5 py-3 flex items-center gap-2 border-b border-border">
-            <div className="w-8 h-8 rounded-full grid place-items-center" style={{ background: "var(--gradient-gold)" }}>
-              <Compass className="w-4 h-4 text-primary-foreground" />
-            </div>
-            <div>
-              <div className="text-xs font-semibold">Good morning, Aarav</div>
-              <div className="text-[10px] text-muted-foreground">Day 14 · Focus Master</div>
-            </div>
-          </div>
-          <div className="flex-1 p-4 space-y-3 overflow-hidden">
-            <div className="rounded-2xl p-3 border border-border bg-card">
-              <div className="text-[10px] uppercase tracking-wider text-gold-deep font-semibold mb-1">Today's nudge</div>
-              <div className="text-sm font-display leading-snug">"You said 4 hrs of study. You're at 2.5. One more hour can change everything."</div>
-            </div>
-            <div className="rounded-2xl p-3 bg-muted">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-xs font-semibold">Streaks</span>
-                <span className="text-xs text-muted-foreground">7 days</span>
-              </div>
-              <div className="flex gap-1">
-                {Array.from({ length: 7 }).map((_, i) => (
-                  <div key={i} className="flex-1 h-1.5 rounded-full" style={{ background: "var(--gradient-gold)" }} />
-                ))}
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              {["Meditate", "Deep work", "No scroll", "Journal"].map((h) => (
-                <div key={h} className="rounded-xl p-2 border border-border bg-card flex items-center gap-2 text-xs">
-                  <Check className="w-3 h-3 text-sage" /> {h}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+    <div className="relative mx-auto w-full max-w-[460px]">
+      <div className="absolute -inset-6 rounded-[2.5rem] blur-3xl opacity-50" style={{ background: "var(--gradient-gold)" }} />
+      <div className="relative rounded-[2rem] overflow-hidden border border-border bg-card" style={{ boxShadow: "var(--shadow-soft)" }}>
+        <img
+          src={productImage}
+          alt="Polaris — a premium self-discovery companion"
+          width={1024}
+          height={1280}
+          className="w-full h-auto object-cover"
+        />
       </div>
     </div>
   );
@@ -151,9 +120,9 @@ function SurveySection({ id }: { id: string }) {
   return (
     <section id={id} className="py-24 px-6 bg-secondary/40">
       <div className="mx-auto max-w-3xl text-center mb-12">
-        <div className="text-xs uppercase tracking-[0.2em] text-gold-deep font-semibold mb-3">The 60-Second Survey</div>
-        <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">Help us build something <em className="italic">you'd actually use</em></h2>
-        <p className="mt-4 text-muted-foreground">6 quick questions. One at a time. No spam.</p>
+        <div className="text-xs uppercase tracking-[0.2em] text-gold-deep font-semibold mb-3">Your Personal Blueprint</div>
+        <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">Let's get to <em className="italic">know you</em></h2>
+        <p className="mt-4 text-muted-foreground">6 quick questions so Polaris can tailor a plan to your goals, your pace, and your life.</p>
       </div>
       <Survey />
     </section>
@@ -217,12 +186,15 @@ function Survey() {
 
       {isContact && (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">Where do we send your early access?</h3>
-          <p className="mt-2 text-sm text-muted-foreground">We'll only message you once: when North Star is ready.</p>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">Where should we send your blueprint?</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Drop an email <em>or</em> WhatsApp number — whichever you check more. We'll send your personalized plan there.</p>
           <div className="mt-6 space-y-4">
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Email</label>
               <Input type="email" placeholder="you@example.com" value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} className="mt-1 h-12 rounded-xl" />
+            </div>
+            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <div className="flex-1 h-px bg-border" /> or <div className="flex-1 h-px bg-border" />
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">WhatsApp Number</label>
@@ -233,15 +205,15 @@ function Survey() {
             <Button variant="ghost" onClick={() => setStep((s) => s - 1)}>Back</Button>
             <Button
               size="lg"
-              disabled={!contact.email || !contact.phone}
+              disabled={!contact.email && !contact.phone}
               onClick={() => {
-                try { localStorage.setItem("northstar_survey", JSON.stringify({ answers, contact, at: Date.now() })); } catch {}
+                try { localStorage.setItem("polaris_survey", JSON.stringify({ answers, contact, at: Date.now() })); } catch {}
                 setSubmitted(true);
               }}
               className="rounded-full h-12 px-6"
               style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}
             >
-              Submit & claim my spot <ArrowRight className="w-4 h-4 ml-1" />
+              Generate my blueprint <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </div>
@@ -257,7 +229,7 @@ function JoinWhatsApp() {
         <Check className="w-8 h-8 text-primary-foreground" strokeWidth={3} />
       </div>
       <h3 className="mt-6 font-display text-3xl font-semibold tracking-tight">You're in.</h3>
-      <p className="mt-3 text-muted-foreground">Join our WhatsApp founding-member group — that's where we share build updates and pick our first 100 testers.</p>
+      <p className="mt-3 text-muted-foreground">Join our Polaris insiders WhatsApp group — that's where we share blueprints, weekly challenges, and pick our first 100 testers.</p>
       <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener noreferrer">
         <Button size="lg" className="mt-6 rounded-full h-12 px-6 bg-sage hover:bg-sage/90 text-primary-foreground">
           <MessageCircle className="w-4 h-4 mr-2" /> Join the WhatsApp group
@@ -351,11 +323,11 @@ function SecondSurveyCTA() {
       <div className="mx-auto max-w-4xl rounded-3xl overflow-hidden relative p-12 sm:p-16 text-center" style={{ background: "var(--gradient-gold)" }}>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white, transparent 40%), radial-gradient(circle at 80% 80%, white, transparent 40%)" }} />
         <div className="relative">
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-primary">Your answers shape what we build.</h2>
-          <p className="mt-4 text-primary/80 max-w-xl mx-auto">Take 60 seconds. Help us replace astrology with science for a generation.</p>
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-primary-foreground">Ready to meet your future self?</h2>
+          <p className="mt-4 text-primary-foreground/85 max-w-xl mx-auto">Six honest answers. One personalized blueprint built around your goals, your habits, your pace.</p>
           <a href="#survey">
-            <Button size="lg" className="mt-8 rounded-full h-12 px-7 bg-primary text-primary-foreground hover:bg-primary/90">
-              Start the survey <ArrowRight className="w-4 h-4 ml-1" />
+            <Button size="lg" className="mt-8 rounded-full h-12 px-7 bg-background text-foreground hover:bg-background/90">
+              Build my blueprint <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </a>
         </div>
@@ -370,10 +342,10 @@ function Footer() {
       <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
           <Compass className="w-4 h-4 text-gold-deep" />
-          <span className="font-display font-semibold text-foreground">North Star</span>
-          <span>· In a world of distraction, we give direction.</span>
+          <span className="font-display font-semibold text-foreground">Polaris</span>
+          <span>· Your inner compass, decoded.</span>
         </div>
-        <div>© {new Date().getFullYear()} North Star Labs</div>
+        <div>© {new Date().getFullYear()} Polaris Labs</div>
       </div>
     </footer>
   );
