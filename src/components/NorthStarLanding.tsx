@@ -2,8 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote } from "lucide-react";
-import productImage from "@/assets/polaris-product.jpg";
+import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote, Brain, Flame, Trophy, MapPin } from "lucide-react";
+import productImage from "@/assets/polaris-direction.jpg";
+import personaAarav from "@/assets/persona-aarav.jpg";
+import personaSneha from "@/assets/persona-sneha.jpg";
+import personaRohit from "@/assets/persona-rohit.jpg";
 
 type Question = {
   id: string;
@@ -18,7 +21,7 @@ const QUESTIONS: Question[] = [
   { id: "screen", question: "How many hours a day do you spend on social media?", options: ["Less than 2", "2–4 hours", "4–6 hours", "6+ hours"] },
   { id: "struggle", question: "What's your biggest struggle right now?", options: ["Focus & studies", "Mental health & anxiety", "Bad habits (porn, scrolling)", "No clear life goal"] },
   { id: "tried", question: "What have you tried for guidance?", options: ["Astrology apps", "Motivational podcasts", "Self-help books", "Nothing — I just scroll"] },
-  { id: "pay", question: "Would you pay ₹99/month for a science-backed life coach app?", options: ["Yes, instantly", "Yes, if it works", "Maybe — show me first", "No, must be free"] },
+  { id: "city", question: "Which kind of place do you call home?", subtitle: "Helps us tune the plan to your context.", options: ["Tier I metro (Mumbai, Delhi, Bengaluru…)", "Tier II city (Pune, Jaipur, Kochi…)", "Tier III town", "Rural India"] },
 ];
 
 export function NorthStarLanding() {
@@ -70,9 +73,19 @@ function Hero() {
             In a world of <em className="italic text-gold-deep">distraction</em>,
             <br /> we give <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>direction</span>.
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
-            Polaris is your personal self-discovery coach. Answer a few questions about who you are today, and we'll craft a science-backed daily plan to help you focus, grow, and become the version of you you're meant to be.
-          </p>
+          <div className="mt-8 relative max-w-xl">
+            <div className="absolute -left-4 top-0 bottom-0 w-1 rounded-full" style={{ background: "var(--gradient-gold)" }} />
+            <p className="pl-6 text-lg text-foreground/80 leading-relaxed font-light">
+              <span className="font-display italic text-foreground text-xl">Polaris</span> is your personal self-discovery coach. Answer a few honest questions about who you are today — we'll craft a <span className="font-semibold text-foreground">science-backed daily plan</span> to help you focus, grow, and meet the version of you you're meant to be.
+            </p>
+            <div className="mt-5 pl-6 flex flex-wrap gap-2">
+              {["Psychology-led", "Built around you", "5-minute rituals"].map((t) => (
+                <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-full bg-card border border-border text-foreground/70">
+                  {t}
+                </span>
+              ))}
+            </div>
+          </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#survey">
               <Button size="lg" className="rounded-full text-base h-12 px-6" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)", boxShadow: "var(--shadow-glow)" }}>
@@ -243,6 +256,7 @@ const personas = [
   {
     name: "Aarav, 17",
     label: "JEE aspirant · Kota",
+    image: personaAarav,
     pain: "Scrolling 6 hrs/day, failed two mock tests, parents disappointed.",
     psych: "Cue-routine-reward loop replaced Instagram with a 'study trigger'.",
     exp: "Daily 90-min Deep Work blocks, peer accountability with 4 other aspirants.",
@@ -251,6 +265,7 @@ const personas = [
   {
     name: "Sneha, 21",
     label: "B.Com final year · Pune",
+    image: personaSneha,
     pain: "No career clarity, anxiety attacks, comparing herself on Instagram every night.",
     psych: "CBT journaling + gratitude practice rewired her self-talk.",
     exp: "Personalised 60-day clarity plan, weekly AI book summaries (Drive, Atomic Habits).",
@@ -259,6 +274,7 @@ const personas = [
   {
     name: "Rohit, 24",
     label: "Software engineer · Bengaluru",
+    image: personaRohit,
     pain: "Addicted to porn & late-night reels, burnt out, lost gym streak after 2 yrs.",
     psych: "Urge-surfing + dopamine reset, NOFAP framework with anonymous community.",
     exp: "90-day reset plan, streak gamification, 5 AM club challenge.",
@@ -275,27 +291,43 @@ function CaseStudies() {
           <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">From <em className="italic">lost</em> to leading their own life</h2>
           <p className="mt-4 text-muted-foreground">Three people. Three pain points. One framework: psychology + experience + measurable milestones.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-7">
           {personas.map((p, i) => (
-            <div key={p.name} className="rounded-3xl bg-card border border-border p-7 flex flex-col" style={{ boxShadow: "var(--shadow-soft)" }}>
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-12 h-12 rounded-full grid place-items-center font-display text-lg font-semibold" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}>
-                  {p.name.charAt(0)}
+            <article
+              key={p.name}
+              className="group relative rounded-[2rem] bg-card border border-border overflow-hidden flex flex-col transition-all hover:-translate-y-1"
+              style={{ boxShadow: "var(--shadow-soft)" }}
+            >
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={`Portrait of ${p.name}`}
+                  loading="lazy"
+                  width={640}
+                  height={640}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, oklch(0.22 0.05 30 / 0.85) 100%)" }} />
+                <div className="absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full bg-background/80 backdrop-blur text-foreground">
+                  Case #{i + 1}
                 </div>
-                <div>
-                  <div className="font-semibold">{p.name}</div>
-                  <div className="text-xs text-muted-foreground">{p.label}</div>
+                <div className="absolute bottom-4 left-5 right-5 text-primary-foreground">
+                  <div className="font-display text-2xl font-semibold tracking-tight">{p.name}</div>
+                  <div className="text-xs opacity-90">{p.label}</div>
                 </div>
               </div>
-              <Quote className="w-5 h-5 text-gold-deep mb-2" />
-              <p className="text-sm text-foreground/90 italic leading-relaxed mb-6">"{p.pain}"</p>
-              <div className="space-y-4 text-sm border-t border-border pt-5 flex-1">
-                <Milestone label="Psychology" text={p.psych} step={1} />
-                <Milestone label="Experience" text={p.exp} step={2} />
-                <Milestone label="Achieved" text={p.goal} step={3} highlight />
+              <div className="p-7 flex flex-col flex-1">
+                <div className="relative rounded-2xl bg-secondary/60 border border-border p-4 mb-6">
+                  <Quote className="absolute -top-2 -left-2 w-5 h-5 text-gold-deep bg-card rounded-full p-0.5" />
+                  <p className="text-sm text-foreground/90 italic leading-relaxed">"{p.pain}"</p>
+                </div>
+                <div className="space-y-4 text-sm flex-1">
+                  <Milestone label="Psychology" text={p.psych} step={1} icon={<Brain className="w-3.5 h-3.5" />} />
+                  <Milestone label="Experience" text={p.exp} step={2} icon={<Flame className="w-3.5 h-3.5" />} />
+                  <Milestone label="Achieved" text={p.goal} step={3} icon={<Trophy className="w-3.5 h-3.5" />} highlight />
+                </div>
               </div>
-              <div className="mt-6 text-xs text-muted-foreground">Case study #{i + 1}</div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
@@ -303,11 +335,11 @@ function CaseStudies() {
   );
 }
 
-function Milestone({ label, text, step, highlight }: { label: string; text: string; step: number; highlight?: boolean }) {
+function Milestone({ label, text, step, highlight, icon }: { label: string; text: string; step: number; highlight?: boolean; icon?: React.ReactNode }) {
   return (
     <div className="flex gap-3">
-      <div className={`w-6 h-6 rounded-full grid place-items-center text-[10px] font-bold shrink-0 ${highlight ? "text-primary-foreground" : "text-foreground bg-muted"}`} style={highlight ? { background: "var(--gradient-gold)" } : undefined}>
-        {step}
+      <div className={`w-7 h-7 rounded-full grid place-items-center text-[10px] font-bold shrink-0 ${highlight ? "text-primary-foreground" : "text-foreground bg-muted"}`} style={highlight ? { background: "var(--gradient-gold)" } : undefined}>
+        {icon ?? step}
       </div>
       <div>
         <div className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground">{label}</div>
