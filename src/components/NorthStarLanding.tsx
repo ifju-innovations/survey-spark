@@ -256,6 +256,7 @@ const personas = [
   {
     name: "Aarav, 17",
     label: "JEE aspirant · Kota",
+    image: personaAarav,
     pain: "Scrolling 6 hrs/day, failed two mock tests, parents disappointed.",
     psych: "Cue-routine-reward loop replaced Instagram with a 'study trigger'.",
     exp: "Daily 90-min Deep Work blocks, peer accountability with 4 other aspirants.",
@@ -264,6 +265,7 @@ const personas = [
   {
     name: "Sneha, 21",
     label: "B.Com final year · Pune",
+    image: personaSneha,
     pain: "No career clarity, anxiety attacks, comparing herself on Instagram every night.",
     psych: "CBT journaling + gratitude practice rewired her self-talk.",
     exp: "Personalised 60-day clarity plan, weekly AI book summaries (Drive, Atomic Habits).",
@@ -272,6 +274,7 @@ const personas = [
   {
     name: "Rohit, 24",
     label: "Software engineer · Bengaluru",
+    image: personaRohit,
     pain: "Addicted to porn & late-night reels, burnt out, lost gym streak after 2 yrs.",
     psych: "Urge-surfing + dopamine reset, NOFAP framework with anonymous community.",
     exp: "90-day reset plan, streak gamification, 5 AM club challenge.",
@@ -288,27 +291,43 @@ function CaseStudies() {
           <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">From <em className="italic">lost</em> to leading their own life</h2>
           <p className="mt-4 text-muted-foreground">Three people. Three pain points. One framework: psychology + experience + measurable milestones.</p>
         </div>
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-3 gap-7">
           {personas.map((p, i) => (
-            <div key={p.name} className="rounded-3xl bg-card border border-border p-7 flex flex-col" style={{ boxShadow: "var(--shadow-soft)" }}>
-              <div className="flex items-center gap-3 mb-5">
-                <div className="w-12 h-12 rounded-full grid place-items-center font-display text-lg font-semibold" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}>
-                  {p.name.charAt(0)}
+            <article
+              key={p.name}
+              className="group relative rounded-[2rem] bg-card border border-border overflow-hidden flex flex-col transition-all hover:-translate-y-1"
+              style={{ boxShadow: "var(--shadow-soft)" }}
+            >
+              <div className="relative h-56 overflow-hidden">
+                <img
+                  src={p.image}
+                  alt={`Portrait of ${p.name}`}
+                  loading="lazy"
+                  width={640}
+                  height={640}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, transparent 40%, oklch(0.22 0.05 30 / 0.85) 100%)" }} />
+                <div className="absolute top-4 left-4 text-[10px] font-semibold uppercase tracking-[0.2em] px-2.5 py-1 rounded-full bg-background/80 backdrop-blur text-foreground">
+                  Case #{i + 1}
                 </div>
-                <div>
-                  <div className="font-semibold">{p.name}</div>
-                  <div className="text-xs text-muted-foreground">{p.label}</div>
+                <div className="absolute bottom-4 left-5 right-5 text-primary-foreground">
+                  <div className="font-display text-2xl font-semibold tracking-tight">{p.name}</div>
+                  <div className="text-xs opacity-90">{p.label}</div>
                 </div>
               </div>
-              <Quote className="w-5 h-5 text-gold-deep mb-2" />
-              <p className="text-sm text-foreground/90 italic leading-relaxed mb-6">"{p.pain}"</p>
-              <div className="space-y-4 text-sm border-t border-border pt-5 flex-1">
-                <Milestone label="Psychology" text={p.psych} step={1} />
-                <Milestone label="Experience" text={p.exp} step={2} />
-                <Milestone label="Achieved" text={p.goal} step={3} highlight />
+              <div className="p-7 flex flex-col flex-1">
+                <div className="relative rounded-2xl bg-secondary/60 border border-border p-4 mb-6">
+                  <Quote className="absolute -top-2 -left-2 w-5 h-5 text-gold-deep bg-card rounded-full p-0.5" />
+                  <p className="text-sm text-foreground/90 italic leading-relaxed">"{p.pain}"</p>
+                </div>
+                <div className="space-y-4 text-sm flex-1">
+                  <Milestone label="Psychology" text={p.psych} step={1} icon={<Brain className="w-3.5 h-3.5" />} />
+                  <Milestone label="Experience" text={p.exp} step={2} icon={<Flame className="w-3.5 h-3.5" />} />
+                  <Milestone label="Achieved" text={p.goal} step={3} icon={<Trophy className="w-3.5 h-3.5" />} highlight />
+                </div>
               </div>
-              <div className="mt-6 text-xs text-muted-foreground">Case study #{i + 1}</div>
-            </div>
+            </article>
           ))}
         </div>
       </div>
