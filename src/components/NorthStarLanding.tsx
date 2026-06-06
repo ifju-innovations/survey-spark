@@ -229,7 +229,7 @@ function JoinWhatsApp() {
         <Check className="w-8 h-8 text-primary-foreground" strokeWidth={3} />
       </div>
       <h3 className="mt-6 font-display text-3xl font-semibold tracking-tight">You're in.</h3>
-      <p className="mt-3 text-muted-foreground">Join our WhatsApp founding-member group — that's where we share build updates and pick our first 100 testers.</p>
+      <p className="mt-3 text-muted-foreground">Join our Polaris insiders WhatsApp group — that's where we share blueprints, weekly challenges, and pick our first 100 testers.</p>
       <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener noreferrer">
         <Button size="lg" className="mt-6 rounded-full h-12 px-6 bg-sage hover:bg-sage/90 text-primary-foreground">
           <MessageCircle className="w-4 h-4 mr-2" /> Join the WhatsApp group
@@ -323,11 +323,11 @@ function SecondSurveyCTA() {
       <div className="mx-auto max-w-4xl rounded-3xl overflow-hidden relative p-12 sm:p-16 text-center" style={{ background: "var(--gradient-gold)" }}>
         <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white, transparent 40%), radial-gradient(circle at 80% 80%, white, transparent 40%)" }} />
         <div className="relative">
-          <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-primary">Your answers shape what we build.</h2>
-          <p className="mt-4 text-primary/80 max-w-xl mx-auto">Take 60 seconds. Help us replace astrology with science for a generation.</p>
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-primary-foreground">Ready to meet your future self?</h2>
+          <p className="mt-4 text-primary-foreground/85 max-w-xl mx-auto">Six honest answers. One personalized blueprint built around your goals, your habits, your pace.</p>
           <a href="#survey">
-            <Button size="lg" className="mt-8 rounded-full h-12 px-7 bg-primary text-primary-foreground hover:bg-primary/90">
-              Start the survey <ArrowRight className="w-4 h-4 ml-1" />
+            <Button size="lg" className="mt-8 rounded-full h-12 px-7 bg-background text-foreground hover:bg-background/90">
+              Build my blueprint <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </a>
         </div>
@@ -342,10 +342,10 @@ function Footer() {
       <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
         <div className="flex items-center gap-2">
           <Compass className="w-4 h-4 text-gold-deep" />
-          <span className="font-display font-semibold text-foreground">North Star</span>
-          <span>· In a world of distraction, we give direction.</span>
+          <span className="font-display font-semibold text-foreground">Polaris</span>
+          <span>· Your inner compass, decoded.</span>
         </div>
-        <div>© {new Date().getFullYear()} North Star Labs</div>
+        <div>© {new Date().getFullYear()} Polaris Labs</div>
       </div>
     </footer>
   );
