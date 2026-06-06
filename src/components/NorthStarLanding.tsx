@@ -1,0 +1,380 @@
+import { useEffect, useMemo, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Progress } from "@/components/ui/progress";
+import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote, Smartphone } from "lucide-react";
+
+type Question = {
+  id: string;
+  question: string;
+  subtitle?: string;
+  options: string[];
+};
+
+const QUESTIONS: Question[] = [
+  { id: "age", question: "How old are you?", options: ["15–18", "19–22", "23–26", "27–30"] },
+  { id: "feel", question: "How often do you feel lost or directionless?", subtitle: "Be honest — no one's watching.", options: ["Almost every day", "A few times a week", "Sometimes", "Rarely"] },
+  { id: "screen", question: "How many hours a day do you spend on social media?", options: ["Less than 2", "2–4 hours", "4–6 hours", "6+ hours"] },
+  { id: "struggle", question: "What's your biggest struggle right now?", options: ["Focus & studies", "Mental health & anxiety", "Bad habits (porn, scrolling)", "No clear life goal"] },
+  { id: "tried", question: "What have you tried for guidance?", options: ["Astrology apps", "Motivational podcasts", "Self-help books", "Nothing — I just scroll"] },
+  { id: "pay", question: "Would you pay ₹99/month for a science-backed life coach app?", options: ["Yes, instantly", "Yes, if it works", "Maybe — show me first", "No, must be free"] },
+];
+
+export function NorthStarLanding() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      <Nav />
+      <Hero />
+      <SurveySection id="survey" />
+      <CaseStudies />
+      <SecondSurveyCTA />
+      <Footer />
+    </div>
+  );
+}
+
+function Nav() {
+  return (
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-background/70 border-b border-border/50">
+      <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+        <a href="#top" className="flex items-center gap-2">
+          <div className="w-9 h-9 rounded-full grid place-items-center" style={{ background: "var(--gradient-gold)" }}>
+            <Compass className="w-5 h-5 text-primary-foreground" strokeWidth={2.5} />
+          </div>
+          <span className="font-display text-xl font-semibold tracking-tight">North Star</span>
+        </a>
+        <a href="#survey">
+          <Button variant="default" size="sm" className="rounded-full">
+            Take the survey <ArrowRight className="w-4 h-4 ml-1" />
+          </Button>
+        </a>
+      </div>
+    </header>
+  );
+}
+
+function Hero() {
+  return (
+    <section id="top" className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <div className="absolute inset-0 opacity-40 pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, oklch(0.78 0.14 70 / 0.4), transparent 70%)" }} />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, oklch(0.68 0.07 145 / 0.3), transparent 70%)" }} />
+      </div>
+      <div className="relative mx-auto max-w-6xl px-6 pt-20 pb-28 grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-border bg-card/60 text-xs font-medium text-muted-foreground mb-6">
+            <Sparkles className="w-3.5 h-3.5 text-gold-deep" /> Now validating with 1,000 students across India
+          </div>
+          <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight">
+            In a world of <em className="italic text-gold-deep">distraction</em>,
+            <br /> we give <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>direction</span>.
+          </h1>
+          <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
+            North Star is a science-backed life-coach app for Indian youth. Replace doomscrolling with daily nudges, personalised plans, and a community that's actually building something.
+          </p>
+          <div className="mt-8 flex flex-wrap gap-3">
+            <a href="#survey">
+              <Button size="lg" className="rounded-full text-base h-12 px-6" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)", boxShadow: "var(--shadow-glow)" }}>
+                Take the 60-second survey <ArrowRight className="w-4 h-4 ml-1" />
+              </Button>
+            </a>
+            <a href="#stories">
+              <Button size="lg" variant="outline" className="rounded-full text-base h-12 px-6 bg-card/60">
+                See real stories
+              </Button>
+            </a>
+          </div>
+          <div className="mt-8 flex items-center gap-6 text-sm text-muted-foreground">
+            <div><span className="font-semibold text-foreground">60M+</span> use astrology apps</div>
+            <div className="w-px h-4 bg-border" />
+            <div><span className="font-semibold text-foreground">5–7 hrs</span> daily scrolling</div>
+            <div className="w-px h-4 bg-border" />
+            <div><span className="font-semibold text-foreground">68%</span> feel alienated</div>
+          </div>
+        </div>
+        <PhoneMock />
+      </div>
+    </section>
+  );
+}
+
+function PhoneMock() {
+  return (
+    <div className="relative mx-auto w-[300px] sm:w-[340px]">
+      <div className="absolute inset-0 -m-4 rounded-[3rem] blur-2xl opacity-60" style={{ background: "var(--gradient-gold)" }} />
+      <div className="relative rounded-[2.5rem] bg-foreground p-3 shadow-2xl">
+        <div className="rounded-[2rem] bg-background overflow-hidden aspect-[9/19] flex flex-col">
+          <div className="px-5 pt-3 pb-2 flex items-center justify-between text-[10px] text-muted-foreground">
+            <span>9:41</span>
+            <Smartphone className="w-3 h-3" />
+          </div>
+          <div className="px-5 py-3 flex items-center gap-2 border-b border-border">
+            <div className="w-8 h-8 rounded-full grid place-items-center" style={{ background: "var(--gradient-gold)" }}>
+              <Compass className="w-4 h-4 text-primary-foreground" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold">Good morning, Aarav</div>
+              <div className="text-[10px] text-muted-foreground">Day 14 · Focus Master</div>
+            </div>
+          </div>
+          <div className="flex-1 p-4 space-y-3 overflow-hidden">
+            <div className="rounded-2xl p-3 border border-border bg-card">
+              <div className="text-[10px] uppercase tracking-wider text-gold-deep font-semibold mb-1">Today's nudge</div>
+              <div className="text-sm font-display leading-snug">"You said 4 hrs of study. You're at 2.5. One more hour can change everything."</div>
+            </div>
+            <div className="rounded-2xl p-3 bg-muted">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs font-semibold">Streaks</span>
+                <span className="text-xs text-muted-foreground">7 days</span>
+              </div>
+              <div className="flex gap-1">
+                {Array.from({ length: 7 }).map((_, i) => (
+                  <div key={i} className="flex-1 h-1.5 rounded-full" style={{ background: "var(--gradient-gold)" }} />
+                ))}
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              {["Meditate", "Deep work", "No scroll", "Journal"].map((h) => (
+                <div key={h} className="rounded-xl p-2 border border-border bg-card flex items-center gap-2 text-xs">
+                  <Check className="w-3 h-3 text-sage" /> {h}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SurveySection({ id }: { id: string }) {
+  return (
+    <section id={id} className="py-24 px-6 bg-secondary/40">
+      <div className="mx-auto max-w-3xl text-center mb-12">
+        <div className="text-xs uppercase tracking-[0.2em] text-gold-deep font-semibold mb-3">The 60-Second Survey</div>
+        <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">Help us build something <em className="italic">you'd actually use</em></h2>
+        <p className="mt-4 text-muted-foreground">6 quick questions. One at a time. No spam.</p>
+      </div>
+      <Survey />
+    </section>
+  );
+}
+
+function Survey() {
+  const [step, setStep] = useState(0);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [contact, setContact] = useState({ email: "", phone: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const total = QUESTIONS.length + 1;
+  const progress = useMemo(() => Math.round(((step) / total) * 100), [step, total]);
+
+  const cardRef = useRef<HTMLDivElement>(null);
+  useEffect(() => { cardRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" }); }, [step]);
+
+  if (submitted) return <JoinWhatsApp />;
+
+  const isContact = step === QUESTIONS.length;
+  const q = QUESTIONS[step];
+
+  return (
+    <div ref={cardRef} className="mx-auto max-w-2xl rounded-3xl bg-card border border-border p-6 sm:p-10" style={{ boxShadow: "var(--shadow-soft)" }}>
+      <div className="flex items-center justify-between mb-2 text-xs font-medium text-muted-foreground">
+        <span>{Math.min(step + 1, total)} of {total}</span>
+        <span>{progress}% complete</span>
+      </div>
+      <Progress value={progress} className="h-2 mb-8" />
+
+      {!isContact && q && (
+        <div key={q.id} className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">{q.question}</h3>
+          {q.subtitle && <p className="mt-2 text-sm text-muted-foreground">{q.subtitle}</p>}
+          <div className="mt-6 grid sm:grid-cols-2 gap-3">
+            {q.options.map((opt) => {
+              const selected = answers[q.id] === opt;
+              return (
+                <button
+                  key={opt}
+                  onClick={() => {
+                    setAnswers((a) => ({ ...a, [q.id]: opt }));
+                    setTimeout(() => setStep((s) => s + 1), 250);
+                  }}
+                  className={`text-left rounded-2xl p-4 border-2 transition-all hover:-translate-y-0.5 ${selected ? "border-gold bg-accent/30" : "border-border bg-background hover:border-gold/50"}`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-medium">{opt}</span>
+                    {selected && <Check className="w-4 h-4 text-gold-deep" />}
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+          <div className="mt-8 flex justify-between">
+            <Button variant="ghost" disabled={step === 0} onClick={() => setStep((s) => Math.max(0, s - 1))}>Back</Button>
+            <Button variant="ghost" onClick={() => setStep((s) => s + 1)}>Skip</Button>
+          </div>
+        </div>
+      )}
+
+      {isContact && (
+        <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">Where do we send your early access?</h3>
+          <p className="mt-2 text-sm text-muted-foreground">We'll only message you once: when North Star is ready.</p>
+          <div className="mt-6 space-y-4">
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Email</label>
+              <Input type="email" placeholder="you@example.com" value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} className="mt-1 h-12 rounded-xl" />
+            </div>
+            <div>
+              <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">WhatsApp Number</label>
+              <Input type="tel" placeholder="+91 98765 43210" value={contact.phone} onChange={(e) => setContact({ ...contact, phone: e.target.value })} className="mt-1 h-12 rounded-xl" />
+            </div>
+          </div>
+          <div className="mt-8 flex items-center justify-between">
+            <Button variant="ghost" onClick={() => setStep((s) => s - 1)}>Back</Button>
+            <Button
+              size="lg"
+              disabled={!contact.email || !contact.phone}
+              onClick={() => {
+                try { localStorage.setItem("northstar_survey", JSON.stringify({ answers, contact, at: Date.now() })); } catch {}
+                setSubmitted(true);
+              }}
+              className="rounded-full h-12 px-6"
+              style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}
+            >
+              Submit & claim my spot <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function JoinWhatsApp() {
+  return (
+    <div className="mx-auto max-w-2xl rounded-3xl bg-card border border-border p-10 text-center" style={{ boxShadow: "var(--shadow-soft)" }}>
+      <div className="mx-auto w-16 h-16 rounded-full grid place-items-center" style={{ background: "var(--gradient-gold)" }}>
+        <Check className="w-8 h-8 text-primary-foreground" strokeWidth={3} />
+      </div>
+      <h3 className="mt-6 font-display text-3xl font-semibold tracking-tight">You're in.</h3>
+      <p className="mt-3 text-muted-foreground">Join our WhatsApp founding-member group — that's where we share build updates and pick our first 100 testers.</p>
+      <a href="https://chat.whatsapp.com/" target="_blank" rel="noopener noreferrer">
+        <Button size="lg" className="mt-6 rounded-full h-12 px-6 bg-sage hover:bg-sage/90 text-primary-foreground">
+          <MessageCircle className="w-4 h-4 mr-2" /> Join the WhatsApp group
+        </Button>
+      </a>
+    </div>
+  );
+}
+
+const personas = [
+  {
+    name: "Aarav, 17",
+    label: "JEE aspirant · Kota",
+    pain: "Scrolling 6 hrs/day, failed two mock tests, parents disappointed.",
+    psych: "Cue-routine-reward loop replaced Instagram with a 'study trigger'.",
+    exp: "Daily 90-min Deep Work blocks, peer accountability with 4 other aspirants.",
+    goal: "AIR 4,521 → cracked JEE Advanced. Now mentors juniors on the app.",
+  },
+  {
+    name: "Sneha, 21",
+    label: "B.Com final year · Pune",
+    pain: "No career clarity, anxiety attacks, comparing herself on Instagram every night.",
+    psych: "CBT journaling + gratitude practice rewired her self-talk.",
+    exp: "Personalised 60-day clarity plan, weekly AI book summaries (Drive, Atomic Habits).",
+    goal: "Landed a content-strategy role at a Series-A startup. Anxiety down 70%.",
+  },
+  {
+    name: "Rohit, 24",
+    label: "Software engineer · Bengaluru",
+    pain: "Addicted to porn & late-night reels, burnt out, lost gym streak after 2 yrs.",
+    psych: "Urge-surfing + dopamine reset, NOFAP framework with anonymous community.",
+    exp: "90-day reset plan, streak gamification, 5 AM club challenge.",
+    goal: "120-day clean streak, ran his first half-marathon, promoted at work.",
+  },
+];
+
+function CaseStudies() {
+  return (
+    <section id="stories" className="py-24 px-6">
+      <div className="mx-auto max-w-6xl">
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <div className="text-xs uppercase tracking-[0.2em] text-gold-deep font-semibold mb-3">Real journeys</div>
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight">From <em className="italic">lost</em> to leading their own life</h2>
+          <p className="mt-4 text-muted-foreground">Three people. Three pain points. One framework: psychology + experience + measurable milestones.</p>
+        </div>
+        <div className="grid md:grid-cols-3 gap-6">
+          {personas.map((p, i) => (
+            <div key={p.name} className="rounded-3xl bg-card border border-border p-7 flex flex-col" style={{ boxShadow: "var(--shadow-soft)" }}>
+              <div className="flex items-center gap-3 mb-5">
+                <div className="w-12 h-12 rounded-full grid place-items-center font-display text-lg font-semibold" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}>
+                  {p.name.charAt(0)}
+                </div>
+                <div>
+                  <div className="font-semibold">{p.name}</div>
+                  <div className="text-xs text-muted-foreground">{p.label}</div>
+                </div>
+              </div>
+              <Quote className="w-5 h-5 text-gold-deep mb-2" />
+              <p className="text-sm text-foreground/90 italic leading-relaxed mb-6">"{p.pain}"</p>
+              <div className="space-y-4 text-sm border-t border-border pt-5 flex-1">
+                <Milestone label="Psychology" text={p.psych} step={1} />
+                <Milestone label="Experience" text={p.exp} step={2} />
+                <Milestone label="Achieved" text={p.goal} step={3} highlight />
+              </div>
+              <div className="mt-6 text-xs text-muted-foreground">Case study #{i + 1}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Milestone({ label, text, step, highlight }: { label: string; text: string; step: number; highlight?: boolean }) {
+  return (
+    <div className="flex gap-3">
+      <div className={`w-6 h-6 rounded-full grid place-items-center text-[10px] font-bold shrink-0 ${highlight ? "text-primary-foreground" : "text-foreground bg-muted"}`} style={highlight ? { background: "var(--gradient-gold)" } : undefined}>
+        {step}
+      </div>
+      <div>
+        <div className="text-[10px] uppercase tracking-wider font-semibold text-muted-foreground">{label}</div>
+        <div className="text-sm leading-relaxed">{text}</div>
+      </div>
+    </div>
+  );
+}
+
+function SecondSurveyCTA() {
+  return (
+    <section className="py-24 px-6">
+      <div className="mx-auto max-w-4xl rounded-3xl overflow-hidden relative p-12 sm:p-16 text-center" style={{ background: "var(--gradient-gold)" }}>
+        <div className="absolute inset-0 opacity-20" style={{ backgroundImage: "radial-gradient(circle at 20% 20%, white, transparent 40%), radial-gradient(circle at 80% 80%, white, transparent 40%)" }} />
+        <div className="relative">
+          <h2 className="font-display text-4xl sm:text-5xl font-semibold tracking-tight text-primary">Your answers shape what we build.</h2>
+          <p className="mt-4 text-primary/80 max-w-xl mx-auto">Take 60 seconds. Help us replace astrology with science for a generation.</p>
+          <a href="#survey">
+            <Button size="lg" className="mt-8 rounded-full h-12 px-7 bg-primary text-primary-foreground hover:bg-primary/90">
+              Start the survey <ArrowRight className="w-4 h-4 ml-1" />
+            </Button>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Footer() {
+  return (
+    <footer className="border-t border-border py-10 px-6">
+      <div className="mx-auto max-w-6xl flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+        <div className="flex items-center gap-2">
+          <Compass className="w-4 h-4 text-gold-deep" />
+          <span className="font-display font-semibold text-foreground">North Star</span>
+          <span>· In a world of distraction, we give direction.</span>
+        </div>
+        <div>© {new Date().getFullYear()} North Star Labs</div>
+      </div>
+    </footer>
+  );
+}

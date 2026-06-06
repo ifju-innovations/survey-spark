@@ -1,29 +1,18 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { NorthStarLanding } from "@/components/NorthStarLanding";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "North Star — In a world of distraction, we give direction" },
+      { name: "description", content: "Science-backed daily guidance for Indian youth. Beat distraction, build habits, find your direction." },
+      { property: "og:title", content: "North Star — Find your direction" },
+      { property: "og:description", content: "Replace doomscrolling with direction. Join the waitlist." },
     ],
   }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <NorthStarLanding />;
 }
