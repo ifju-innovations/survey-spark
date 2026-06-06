@@ -2,8 +2,11 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Progress } from "@/components/ui/progress";
-import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote } from "lucide-react";
-import productImage from "@/assets/polaris-product.jpg";
+import { Compass, Sparkles, MessageCircle, ArrowRight, Check, Quote, Brain, Flame, Trophy, MapPin } from "lucide-react";
+import productImage from "@/assets/polaris-direction.jpg";
+import personaAarav from "@/assets/persona-aarav.jpg";
+import personaSneha from "@/assets/persona-sneha.jpg";
+import personaRohit from "@/assets/persona-rohit.jpg";
 
 type Question = {
   id: string;
@@ -18,7 +21,7 @@ const QUESTIONS: Question[] = [
   { id: "screen", question: "How many hours a day do you spend on social media?", options: ["Less than 2", "2–4 hours", "4–6 hours", "6+ hours"] },
   { id: "struggle", question: "What's your biggest struggle right now?", options: ["Focus & studies", "Mental health & anxiety", "Bad habits (porn, scrolling)", "No clear life goal"] },
   { id: "tried", question: "What have you tried for guidance?", options: ["Astrology apps", "Motivational podcasts", "Self-help books", "Nothing — I just scroll"] },
-  { id: "pay", question: "Would you pay ₹99/month for a science-backed life coach app?", options: ["Yes, instantly", "Yes, if it works", "Maybe — show me first", "No, must be free"] },
+  { id: "city", question: "Which kind of place do you call home?", subtitle: "Helps us tune the plan to your context.", options: ["Tier I metro (Mumbai, Delhi, Bengaluru…)", "Tier II city (Pune, Jaipur, Kochi…)", "Tier III town", "Rural India"] },
 ];
 
 export function NorthStarLanding() {
