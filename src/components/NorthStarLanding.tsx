@@ -186,12 +186,15 @@ function Survey() {
 
       {isContact && (
         <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">Where do we send your early access?</h3>
-          <p className="mt-2 text-sm text-muted-foreground">We'll only message you once: when North Star is ready.</p>
+          <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">Where should we send your blueprint?</h3>
+          <p className="mt-2 text-sm text-muted-foreground">Drop an email <em>or</em> WhatsApp number — whichever you check more. We'll send your personalized plan there.</p>
           <div className="mt-6 space-y-4">
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Email</label>
               <Input type="email" placeholder="you@example.com" value={contact.email} onChange={(e) => setContact({ ...contact, email: e.target.value })} className="mt-1 h-12 rounded-xl" />
+            </div>
+            <div className="flex items-center gap-3 text-xs text-muted-foreground">
+              <div className="flex-1 h-px bg-border" /> or <div className="flex-1 h-px bg-border" />
             </div>
             <div>
               <label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">WhatsApp Number</label>
@@ -202,15 +205,15 @@ function Survey() {
             <Button variant="ghost" onClick={() => setStep((s) => s - 1)}>Back</Button>
             <Button
               size="lg"
-              disabled={!contact.email || !contact.phone}
+              disabled={!contact.email && !contact.phone}
               onClick={() => {
-                try { localStorage.setItem("northstar_survey", JSON.stringify({ answers, contact, at: Date.now() })); } catch {}
+                try { localStorage.setItem("polaris_survey", JSON.stringify({ answers, contact, at: Date.now() })); } catch {}
                 setSubmitted(true);
               }}
               className="rounded-full h-12 px-6"
               style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}
             >
-              Submit & claim my spot <ArrowRight className="w-4 h-4 ml-1" />
+              Generate my blueprint <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
           </div>
         </div>
