@@ -19,6 +19,9 @@ jobs:
       - run: bun install
       - run: bun run build
 
+      - name: List build output
+        run: ls -la .output/ && ls -la .output/public/ || echo "No .output/public found" && ls -la dist/ || echo "No dist found"
+
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
