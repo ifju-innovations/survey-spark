@@ -67,8 +67,8 @@ function Hero() {
             <Sparkles className="w-3.5 h-3.5 text-gold-deep" /> 1,200+ students already discovering themselves with Polaris
           </div>
           <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight">
-            Find your <em className="italic text-gold-deep">true north</em>
-            <br /> with a plan built <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>around you</span>.
+            In a world of <em className="italic text-gold-deep">distraction</em>,
+            <br /> we give <span style={{ background: "var(--gradient-gold)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>direction</span>.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-lg leading-relaxed">
             Polaris is your personal self-discovery coach. Answer a few questions about who you are today, and we'll craft a science-backed daily plan to help you focus, grow, and become the version of you you're meant to be.
