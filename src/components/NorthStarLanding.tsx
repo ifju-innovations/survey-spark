@@ -61,8 +61,8 @@ function Hero() {
   return (
     <section id="top" className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
       <div className="absolute inset-0 opacity-40 pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, oklch(0.78 0.14 70 / 0.4), transparent 70%)" }} />
-        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, oklch(0.68 0.07 145 / 0.3), transparent 70%)" }} />
+        <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, oklch(0.75 0.1 130 / 0.4), transparent 70%)" }} />
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full" style={{ background: "radial-gradient(circle, oklch(0.68 0.06 140 / 0.3), transparent 70%)" }} />
       </div>
       <div className="relative mx-auto max-w-6xl px-6 pt-20 pb-28 grid lg:grid-cols-2 gap-12 items-center">
         <div>
@@ -88,7 +88,7 @@ function Hero() {
           </div>
           <div className="mt-8 flex flex-wrap gap-3">
             <a href="#survey">
-              <Button size="lg" className="rounded-full text-base h-12 px-6" style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)", boxShadow: "var(--shadow-glow)" }}>
+              <Button size="lg" className="rounded-full text-base h-12 px-6" style={{ background: "var(--gradient-gold)", color: "oklch(0.97 0.005 100)", boxShadow: "var(--shadow-glow)" }}>
                 Get my personalized plan <ArrowRight className="w-4 h-4 ml-1" />
               </Button>
             </a>
@@ -99,7 +99,7 @@ function Hero() {
             </a>
           </div>
           <div className="mt-8 flex items-center gap-6 text-sm text-muted-foreground">
-            <div><span className="font-semibold text-foreground">60M+</span> use astrology apps</div>
+            <div><span className="font-semibold text-foreground">60M+</span> use multiple apps daily</div>
             <div className="w-px h-4 bg-border" />
             <div><span className="font-semibold text-foreground">5–7 hrs</span> daily scrolling</div>
             <div className="w-px h-4 bg-border" />
@@ -224,7 +224,7 @@ function Survey() {
                 setSubmitted(true);
               }}
               className="rounded-full h-12 px-6"
-              style={{ background: "var(--gradient-gold)", color: "oklch(0.22 0.03 50)" }}
+              style={{ background: "var(--gradient-gold)", color: "oklch(0.97 0.005 100)" }}
             >
               Generate my blueprint <ArrowRight className="w-4 h-4 ml-1" />
             </Button>
