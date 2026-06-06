@@ -19,11 +19,8 @@ jobs:
       - run: bun install
       - run: bun run build
 
-      - name: List build output
-        run: ls -la .output/ && ls -la .output/public/ || echo "Checking dist..." && ls -la dist/ || true
-
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy .output/public --project-name=survey-spark
+          command: pages deploy dist --project-name=survey-spark
