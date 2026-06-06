@@ -19,15 +19,11 @@ jobs:
       - run: bun install
       - run: bun run build
 
-      - name: Prepare Cloudflare Pages output
-        run: |
-          echo "=== dist/server contents ===" && ls -la dist/server/
-          cp dist/server/index.js dist/client/_worker.js 2>/dev/null || \
-          cp dist/server/_worker.js dist/client/_worker.js 2>/dev/null || \
-          (echo "No worker file found in dist/server" && ls -la dist/server/)
+      - name: List build output
+        run: ls -la .output/ && ls -la .output/public/ || echo "Checking dist..." && ls -la dist/ || true
 
       - uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy dist/client --project-name=survey-spark
+          command: pages deploy .output/public --project-name=survey-spark
